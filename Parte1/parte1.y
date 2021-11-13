@@ -1,4 +1,10 @@
-    
+/*
+---GRUPO 3---
+Guido Mainardi - 18106136 - guido.mainardi@edu.pucrs.br
+Lucas Félix - 18108826 - lucas.salaverry@edu.pucrs.br
+Pedro Wagner - 18106192 - pedro.wagner00@edu.pucrs.br
+Renata Rittmann = 18110282 - renata.rittmann@edu.pucrs.br
+*/  
 %{
   import java.io.*;
 %}
@@ -47,9 +53,8 @@ id : IDENT   { TS_entry nodo = ts.pesquisa($1);
     ;
 
 TArray : '[' NUM ']' TArray { currentType = new TS_entry("?",Tp_ARRAY, 
-                                                   currClass, $2, currentType); }
-          
-       |
+                                                   currClass, $2, currentType); }   
+       | //Construção Vazia
        ;
  
 

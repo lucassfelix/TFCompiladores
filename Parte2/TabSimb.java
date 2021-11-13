@@ -1,3 +1,10 @@
+/*
+---GRUPO 3---
+Guido Mainardi - 18106136 - guido.mainardi@edu.pucrs.br
+Lucas Félix - 18108826 - lucas.salaverry@edu.pucrs.br
+Pedro Wagner - 18106192 - pedro.wagner00@edu.pucrs.br
+Renata Rittmann = 18110282 - renata.rittmann@edu.pucrs.br
+*/
 import java.util.ArrayList;
 import java.util.Iterator;
 
