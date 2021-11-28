@@ -1,5 +1,5 @@
+$TRACE_ON
 int i;
-
 double x;
 
 bool b;
@@ -12,7 +12,7 @@ int[7][11] mat;
 int[30][40][50] cubo;
 
 
-void main() {
+funct void main() {
 
    i = 5;
    

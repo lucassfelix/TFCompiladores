@@ -44,6 +44,7 @@ NL  = \n|\r|\r\n
 "(" |
 ")" |
 "," |
+"." |
 "\{" |
 "\}" |
 "\[" | 
@@ -59,9 +60,11 @@ double  { return Parser.DOUBLE;   }
 bool   { return Parser.BOOL; }
 string { return Parser.STRING; }
 void { return Parser.VOID; }
-main { return Parser.MAIN; }
 if { return Parser.IF; }
+funct { return Parser.FUNCT;}
 struct { return Parser.STRUCT; }
+true {return Parser.TRUE;}
+false {return Parser.FALSE;}
 
 
 [a-zA-Z][a-zA-Z_0-9]* { yyparser.yylval = new ParserVal(yytext());

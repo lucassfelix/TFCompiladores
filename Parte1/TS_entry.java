@@ -8,23 +8,35 @@ Renata Rittmann = 18110282 - renata.rittmann@edu.pucrs.br
 import java.util.ArrayList;
 
 public class TS_entry {
+
    private String id;
    private ClasseID classe;
    private TS_entry tipo;
+
+   //Para arrays
    private int nroElementos;
    private TS_entry tipoBase;
 
-   // construtor para arrays
+   //Para structs/funções
+   private TabSimb locais;
+
+   
    public TS_entry(String umId, TS_entry umTipo, ClasseID umaClasse) {
       this(umId, umTipo, umaClasse, 0, null);
    }
 
+   // construtor para arrays
    public TS_entry(String umId, TS_entry umTipo, ClasseID umaClasse, int elems, TS_entry tp) {
       id = umId;
       tipo = umTipo;
       classe = umaClasse;
       nroElementos = elems;
       tipoBase = tp;
+      locais = new TabSimb();
+   }
+
+   public TabSimb getTabSimb(){
+      return locais;
    }
 
    public String getId() {
@@ -38,17 +50,40 @@ public class TS_entry {
    public TS_entry getTipoBase() {
       return tipoBase;
    }
+   
+   public ClasseID getClasse() {
+      return classe;
+   }
 
    public String toString() {
       StringBuilder aux = new StringBuilder("");
 
       aux.append("Id: ");
       aux.append(String.format("%-10s", id));
-
       aux.append("\tClasse: ");
       aux.append(classe);
-      aux.append("\tTipo: ");
-      aux.append(tipo2str(this.tipo));
+      if( this.tipo != null)
+      {         
+         aux.append("\tTipo: ");
+         aux.append(tipo2str(this.tipo));
+         if(this.tipo == Parser.Tp_FUNCT)
+         {
+            for (TS_entry nodo : locais.getLista())
+            {
+               if(nodo.getClasse() == ClasseID.NomeParam)
+               {
+                  aux.append(tipo2str(nodo.getTipo()) + " " +nodo.getId() + ", ");
+               }
+            }
+            aux.deleteCharAt(aux.length()-2);
+            aux.append(")");
+         }
+      }
+      if (this.tipoBase != null)
+      {
+         aux.append("\tTipo base: ");
+         aux.append(tipo2str(this.tipoBase));
+      }
 
       return aux.toString();
 
@@ -67,8 +102,18 @@ public class TS_entry {
          return "boolean";
       else if (tipo == Parser.Tp_DOUBLE)
          return "double";
-      else if (tipo.getTipo() != null)
+      else if (tipo == Parser.Tp_STRING)
+         return "string";
+      else if (tipo == Parser.Tp_STRUCT)
+         return "struct";
+      else if (tipo == Parser.Tp_FUNCT)
+         return "funct(";
+      else if (tipo == Parser.Tp_VOID)
+         return "void";
+      else if (tipo == Parser.Tp_ARRAY)
          return String.format("array(%d,%s)", tipo.nroElementos, tipo2str(tipo.tipoBase));
+      else if (tipo.getTipo() == Parser.Tp_STRUCT)
+         return String.format("%s", tipo.getId());
 
       else if (tipo == Parser.Tp_ERRO)
          return "_erro_";
