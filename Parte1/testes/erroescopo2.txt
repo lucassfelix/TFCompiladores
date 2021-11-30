@@ -1,0 +1,7 @@
+
+funct void aux(bool i)
+    int i;
+    double y;
+{
+
+}

@@ -1,0 +1,23 @@
+int a;
+bool b;
+double d;
+string s;
+
+struct DATA{
+    int dia;
+};
+
+DATA aniversario;
+
+funct string S(int x, bool b, double d){}
+
+funct int A(string s, DATA d){}
+
+funct bool B(int a){}
+
+funct double D(){}
+
+funct void main()
+{
+    s = S(A("Feliz",aniversario),B(10),D());
+}

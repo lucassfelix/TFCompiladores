@@ -57,7 +57,7 @@
 
   34  $$11 :
 
-  35  funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11
+  35  funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco
 
   36  lista_declaracoes_funct : declaracao_funct lista_declaracoes_funct
   37                          |
@@ -86,22 +86,26 @@
   51      | exp '>' exp
   52      | exp AND exp
   53      | NUM
-  54      | LITERAL
-  55      | TRUE
-  56      | FALSE
-  57      | '(' exp ')'
-  58      | IDENT
-  59      | exp '=' exp
-  60      | exp '[' exp ']'
-  61      | exp '.' exp
+  54      | FLOAT
+  55      | LITERAL
+  56      | TRUE
+  57      | FALSE
+  58      | '(' exp ')'
+  59      | IDENT
+  60      | exp '=' exp
+  61      | exp '[' exp ']'
 
   62  $$14 :
 
-  63  exp : exp '(' $$14 lista_exp ')'
+  63  exp : exp '.' $$14 exp
 
-  64  lista_exp : lista_exp ',' exp
-  65            | exp
-  66            |
+  64  $$15 :
+
+  65  exp : exp '(' $$15 lista_exp ')'
+
+  66  lista_exp : lista_exp ',' exp
+  67            | exp
+  68            |
 
 state 0
 	$accept : . programa $end  (0)
@@ -278,7 +282,7 @@ state 19
 
 
 state 20
-	funcao : FUNCT . tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT . tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 
 	IDENT  shift 3
 	INT  shift 4
@@ -348,7 +352,7 @@ state 28
 
 
 state 29
-	funcao : FUNCT tipo_funct . $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct . $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 	$$7 : .  (30)
 
 	.  reduce 30
@@ -397,7 +401,7 @@ state 33
 
 
 state 34
-	funcao : FUNCT tipo_funct $$7 . IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 . IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 
 	IDENT  shift 40
 	.  error
@@ -447,7 +451,7 @@ state 39
 
 
 state 40
-	funcao : FUNCT tipo_funct $$7 IDENT . $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT . $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 	$$8 : .  (31)
 
 	.  reduce 31
@@ -479,7 +483,7 @@ state 43
 
 
 state 44
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 . '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 . '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 
 	'('  shift 47
 	.  error
@@ -505,7 +509,7 @@ state 46
 
 
 state 47
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' . $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' . $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 	$$9 : .  (32)
 
 	.  reduce 32
@@ -529,7 +533,7 @@ state 49
 
 
 state 50
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 . lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 . lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 	parametro : .  (44)
 
 	IDENT  shift 3
@@ -561,7 +565,7 @@ state 52
 
 
 state 53
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros . ')' $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros . ')' $$10 lista_declaracoes_funct $$11 bloco  (35)
 	lista_parametros : lista_parametros . ',' parametro  (40)
 
 	','  shift 56
@@ -601,7 +605,7 @@ state 56
 
 
 state 57
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' . $$10 lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' . $$10 lista_declaracoes_funct $$11 bloco  (35)
 	$$10 : .  (33)
 
 	.  reduce 33
@@ -622,7 +626,7 @@ state 59
 
 
 state 60
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 . lista_declaracoes_funct bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 . lista_declaracoes_funct $$11 bloco  (35)
 	lista_declaracoes_funct : .  (37)
 
 	IDENT  shift 3
@@ -647,12 +651,12 @@ state 61
 
 
 state 62
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct . bloco $$11  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct . $$11 bloco  (35)
+	$$11 : .  (34)
 
-	'{'  shift 65
-	.  error
+	.  reduce 34
 
-	bloco  goto 66
+	$$11  goto 65
 
 
 state 63
@@ -667,7 +671,7 @@ state 63
 	'{'  reduce 37
 
 	tipo  goto 61
-	lista_declaracoes_funct  goto 67
+	lista_declaracoes_funct  goto 66
 	declaracao_funct  goto 63
 
 
@@ -678,340 +682,349 @@ state 64
 	'['  shift 18
 	IDENT  reduce 24
 
-	TArray  goto 68
+	TArray  goto 67
 
 
 state 65
-	bloco : '{' . listacmd '}'  (45)
-	listacmd : .  (47)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 . bloco  (35)
 
-	.  reduce 47
+	'{'  shift 68
+	.  error
 
-	listacmd  goto 69
+	bloco  goto 69
 
 
 state 66
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco . $$11  (35)
-	$$11 : .  (34)
-
-	.  reduce 34
-
-	$$11  goto 70
-
-
-state 67
 	lista_declaracoes_funct : declaracao_funct lista_declaracoes_funct .  (36)
 
 	.  reduce 36
 
 
-state 68
+state 67
 	declaracao_funct : tipo $$12 TArray . lista_ident ';'  (39)
 
 	IDENT  shift 24
 	.  error
 
-	lista_ident  goto 71
+	lista_ident  goto 70
 	identificador  goto 26
 
 
+state 68
+	bloco : '{' . listacmd '}'  (45)
+	listacmd : .  (47)
+
+	.  reduce 47
+
+	listacmd  goto 71
+
+
 state 69
-	bloco : '{' listacmd . '}'  (45)
-	listacmd : listacmd . cmd  (46)
-
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	IF  shift 75
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
-	'}'  shift 79
-	.  error
-
-	exp  goto 80
-	cmd  goto 81
-
-
-state 70
-	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct bloco $$11 .  (35)
+	funcao : FUNCT tipo_funct $$7 IDENT $$8 '(' $$9 lista_parametros ')' $$10 lista_declaracoes_funct $$11 bloco .  (35)
 
 	.  reduce 35
 
 
-state 71
+state 70
 	lista_ident : lista_ident . ',' identificador  (25)
 	declaracao_funct : tipo $$12 TArray lista_ident . ';'  (39)
 
 	','  shift 32
-	';'  shift 82
+	';'  shift 72
 	.  error
+
+
+state 71
+	bloco : '{' listacmd . '}'  (45)
+	listacmd : listacmd . cmd  (46)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	IF  shift 77
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	'}'  shift 81
+	.  error
+
+	exp  goto 82
+	cmd  goto 83
 
 
 state 72
-	exp : IDENT .  (58)
-
-	.  reduce 58
-
-
-state 73
-	exp : NUM .  (53)
-
-	.  reduce 53
-
-
-state 74
-	exp : LITERAL .  (54)
-
-	.  reduce 54
-
-
-state 75
-	cmd : IF . '(' exp ')' cmd  (49)
-
-	'('  shift 83
-	.  error
-
-
-state 76
-	exp : TRUE .  (55)
-
-	.  reduce 55
-
-
-state 77
-	exp : FALSE .  (56)
-
-	.  reduce 56
-
-
-state 78
-	exp : '(' . exp ')'  (57)
-
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
-	.  error
-
-	exp  goto 84
-
-
-state 79
-	bloco : '{' listacmd '}' .  (45)
-
-	.  reduce 45
-
-
-state 80
-	cmd : exp . ';'  (48)
-	exp : exp . '+' exp  (50)
-	exp : exp . '>' exp  (51)
-	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
-
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	';'  shift 92
-	.  error
-
-
-state 81
-	listacmd : listacmd cmd .  (46)
-
-	.  reduce 46
-
-
-state 82
 	declaracao_funct : tipo $$12 TArray lista_ident ';' .  (39)
 
 	.  reduce 39
 
 
-state 83
-	cmd : IF '(' . exp ')' cmd  (49)
+state 73
+	exp : IDENT .  (59)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	.  reduce 59
+
+
+state 74
+	exp : NUM .  (53)
+
+	.  reduce 53
+
+
+state 75
+	exp : FLOAT .  (54)
+
+	.  reduce 54
+
+
+state 76
+	exp : LITERAL .  (55)
+
+	.  reduce 55
+
+
+state 77
+	cmd : IF . '(' exp ')' cmd  (49)
+
+	'('  shift 84
 	.  error
 
-	exp  goto 93
+
+state 78
+	exp : TRUE .  (56)
+
+	.  reduce 56
 
 
-state 84
+state 79
+	exp : FALSE .  (57)
+
+	.  reduce 57
+
+
+state 80
+	exp : '(' . exp ')'  (58)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	.  error
+
+	exp  goto 85
+
+
+state 81
+	bloco : '{' listacmd '}' .  (45)
+
+	.  reduce 45
+
+
+state 82
+	cmd : exp . ';'  (48)
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : '(' exp . ')'  (57)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	')'  shift 94
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	';'  shift 93
 	.  error
+
+
+state 83
+	listacmd : listacmd cmd .  (46)
+
+	.  reduce 46
+
+
+state 84
+	cmd : IF '(' . exp ')' cmd  (49)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	.  error
+
+	exp  goto 94
 
 
 state 85
-	exp : exp AND . exp  (52)
+	exp : exp . '+' exp  (50)
+	exp : exp . '>' exp  (51)
+	exp : exp . AND exp  (52)
+	exp : '(' exp . ')'  (58)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	')'  shift 95
 	.  error
-
-	exp  goto 95
 
 
 state 86
-	exp : exp '=' . exp  (59)
+	exp : exp AND . exp  (52)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
 	.  error
 
 	exp  goto 96
 
 
 state 87
-	exp : exp '>' . exp  (51)
+	exp : exp '=' . exp  (60)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
 	.  error
 
 	exp  goto 97
 
 
 state 88
-	exp : exp '+' . exp  (50)
+	exp : exp '>' . exp  (51)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
 	.  error
 
 	exp  goto 98
 
 
 state 89
-	exp : exp '[' . exp ']'  (60)
+	exp : exp '+' . exp  (50)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
 	.  error
 
 	exp  goto 99
 
 
 state 90
-	exp : exp '(' . $$14 lista_exp ')'  (63)
+	exp : exp '[' . exp ']'  (61)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	.  error
+
+	exp  goto 100
+
+
+state 91
+	exp : exp '(' . $$15 lista_exp ')'  (65)
+	$$15 : .  (64)
+
+	.  reduce 64
+
+	$$15  goto 101
+
+
+state 92
+	exp : exp '.' . $$14 exp  (63)
 	$$14 : .  (62)
 
 	.  reduce 62
 
-	$$14  goto 100
+	$$14  goto 102
 
 
-state 91
-	exp : exp '.' . exp  (61)
-
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
-	.  error
-
-	exp  goto 101
-
-
-state 92
+state 93
 	cmd : exp ';' .  (48)
 
 	.  reduce 48
 
 
-state 93
+state 94
 	cmd : IF '(' exp . ')' cmd  (49)
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	')'  shift 102
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	')'  shift 103
 	.  error
 
 
-state 94
-	exp : '(' exp ')' .  (57)
-
-	.  reduce 57
-
-
 state 95
+	exp : '(' exp ')' .  (58)
+
+	.  reduce 58
+
+
+state 96
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
 	exp : exp AND exp .  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
 	AND  reduce 52
 	'='  reduce 52
 	'>'  reduce 52
@@ -1022,44 +1035,44 @@ state 95
 	')'  reduce 52
 
 
-state 96
+state 97
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp '=' exp .  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp '=' exp .  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	','  reduce 59
-	';'  reduce 59
-	']'  reduce 59
-	')'  reduce 59
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	','  reduce 60
+	';'  reduce 60
+	']'  reduce 60
+	')'  reduce 60
 
 
-state 97
+state 98
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp '>' exp .  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	AND  shift 85
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
+	AND  shift 86
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
 	'='  reduce 51
 	','  reduce 51
 	';'  reduce 51
@@ -1067,20 +1080,20 @@ state 97
 	')'  reduce 51
 
 
-state 98
+state 99
 	exp : exp . '+' exp  (50)
 	exp : exp '+' exp .  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	AND  shift 85
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
+	AND  shift 86
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
 	'='  reduce 50
 	'>'  reduce 50
 	','  reduce 50
@@ -1090,155 +1103,173 @@ state 98
 	')'  reduce 50
 
 
-state 99
+state 100
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp '[' exp . ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp '[' exp . ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
 
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	']'  shift 103
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	']'  shift 104
 	.  error
 
 
-state 100
-	exp : exp '(' $$14 . lista_exp ')'  (63)
-	lista_exp : .  (66)
-
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
-	','  reduce 66
-	')'  reduce 66
-
-	exp  goto 104
-	lista_exp  goto 105
-
-
 state 101
-	exp : exp . '+' exp  (50)
-	exp : exp . '>' exp  (51)
-	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp '.' exp .  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
+	exp : exp '(' $$15 . lista_exp ')'  (65)
+	lista_exp : .  (68)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	','  reduce 68
+	')'  reduce 68
+
+	exp  goto 105
+	lista_exp  goto 106
+
+
+state 102
+	exp : exp '.' $$14 . exp  (63)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	.  error
+
+	exp  goto 107
+
+
+state 103
+	cmd : IF '(' exp ')' . cmd  (49)
+
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	IF  shift 77
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
+	.  error
+
+	exp  goto 82
+	cmd  goto 108
+
+
+state 104
+	exp : exp '[' exp ']' .  (61)
 
 	.  reduce 61
 
 
-state 102
-	cmd : IF '(' exp ')' . cmd  (49)
-
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	IF  shift 75
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
-	.  error
-
-	exp  goto 80
-	cmd  goto 106
-
-
-state 103
-	exp : exp '[' exp ']' .  (60)
-
-	.  reduce 60
-
-
-state 104
+state 105
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
-	lista_exp : exp .  (65)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
+	lista_exp : exp .  (67)
 
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	','  reduce 65
-	')'  reduce 65
-
-
-state 105
-	exp : exp '(' $$14 lista_exp . ')'  (63)
-	lista_exp : lista_exp . ',' exp  (64)
-
-	','  shift 107
-	')'  shift 108
-	.  error
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	','  reduce 67
+	')'  reduce 67
 
 
 state 106
+	exp : exp '(' $$15 lista_exp . ')'  (65)
+	lista_exp : lista_exp . ',' exp  (66)
+
+	','  shift 109
+	')'  shift 110
+	.  error
+
+
+state 107
+	exp : exp . '+' exp  (50)
+	exp : exp . '>' exp  (51)
+	exp : exp . AND exp  (52)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp '.' $$14 exp .  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
+
+	.  reduce 63
+
+
+state 108
 	cmd : IF '(' exp ')' cmd .  (49)
 
 	.  reduce 49
 
 
-state 107
-	lista_exp : lista_exp ',' . exp  (64)
+state 109
+	lista_exp : lista_exp ',' . exp  (66)
 
-	IDENT  shift 72
-	NUM  shift 73
-	LITERAL  shift 74
-	TRUE  shift 76
-	FALSE  shift 77
-	'('  shift 78
+	IDENT  shift 73
+	NUM  shift 74
+	FLOAT  shift 75
+	LITERAL  shift 76
+	TRUE  shift 78
+	FALSE  shift 79
+	'('  shift 80
 	.  error
 
-	exp  goto 109
+	exp  goto 111
 
 
-state 108
-	exp : exp '(' $$14 lista_exp ')' .  (63)
+state 110
+	exp : exp '(' $$15 lista_exp ')' .  (65)
 
-	.  reduce 63
+	.  reduce 65
 
 
-state 109
+state 111
 	exp : exp . '+' exp  (50)
 	exp : exp . '>' exp  (51)
 	exp : exp . AND exp  (52)
-	exp : exp . '=' exp  (59)
-	exp : exp . '[' exp ']'  (60)
-	exp : exp . '.' exp  (61)
-	exp : exp . '(' $$14 lista_exp ')'  (63)
-	lista_exp : lista_exp ',' exp .  (64)
+	exp : exp . '=' exp  (60)
+	exp : exp . '[' exp ']'  (61)
+	exp : exp . '.' $$14 exp  (63)
+	exp : exp . '(' $$15 lista_exp ')'  (65)
+	lista_exp : lista_exp ',' exp .  (66)
 
-	AND  shift 85
-	'='  shift 86
-	'>'  shift 87
-	'+'  shift 88
-	'['  shift 89
-	'('  shift 90
-	'.'  shift 91
-	','  reduce 64
-	')'  reduce 64
+	AND  shift 86
+	'='  shift 87
+	'>'  shift 88
+	'+'  shift 89
+	'['  shift 90
+	'('  shift 91
+	'.'  shift 92
+	','  reduce 66
+	')'  reduce 66
 
 
-29 terminals, 37 nonterminals
-67 grammar rules, 110 states
+30 terminals, 38 nonterminals
+69 grammar rules, 112 states

@@ -1,0 +1,12 @@
+int i;
+double d;
+string s;
+bool b;
+
+funct void main()
+{
+    i = 10;
+    d = 10.5;
+    s = "10";
+    b = true;
+}

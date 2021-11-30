@@ -1,0 +1,11 @@
+int a;
+
+void main() {
+
+   for (a=1; a < 5 ; a++) {
+        
+      write("a = ", a);
+
+   }
+}
+

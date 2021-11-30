@@ -1,0 +1,30 @@
+int [10] vetor;
+int i;
+int j;
+int aux;
+void main()
+{
+    for (i = 10; i > 0; i--)
+    {
+        vetor[i-1] = i-1;
+    }
+
+    for (i = 0; i < 10; i++)
+    {
+        for (j-0; j < 10-i-1;j++)
+        {
+            if (vetor[j] > vetor[j+1])
+            {
+                aux = vetor[j];
+                vetor[j] = vetor[j+1];
+                vetor[j+1] = aux;
+            }
+        }
+    }
+
+    for(i = 0; i < 10; i++)
+    {
+        write(" ",vetor[i]);
+    }
+
+}

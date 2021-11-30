@@ -1,0 +1,15 @@
+int m;
+
+void main() {
+
+    m = 1;
+    write("m = ", m);
+    m += 1;
+    write("m += 1: ", m);
+    write("m++ :", m++);
+    write("++m :", ++m);
+
+    m = 1;
+    m += ++m + m++;
+    write("m (5 ou 7):", m);
+}

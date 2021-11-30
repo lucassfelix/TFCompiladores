@@ -1,0 +1,28 @@
+
+int mes;
+
+struct DATA {
+    int dia;
+};
+
+struct PESSOA {
+    string nome;
+    DATA d2;
+};
+
+DATA d1;
+PESSOA p1;
+
+int m;
+
+funct int teste(int a, bool c, string d, DATA e)
+{
+    e.dia = a;
+}
+
+funct void main(int x, double z, string w)
+    int m;
+{
+    p1.d2.dia = 10;
+    m = teste(teste(10, true, "brincadeira", d1 ), true, "brincadeira", d1 );
+}

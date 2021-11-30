@@ -1,0 +1,8 @@
+
+int i;
+
+funct void aux(bool i)
+    double y;
+{
+    i = 65;
+}

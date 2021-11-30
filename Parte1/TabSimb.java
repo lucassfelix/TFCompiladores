@@ -48,6 +48,12 @@ public class TabSimb {
   public TS_entry pesquisa(String umId, ClasseID currClass) {
     for (TS_entry nodo : lista) {
 
+      if (currClass == ClasseID.VarLocal)
+      {
+        if(nodo.getClasse() == ClasseID.NomeParam && nodo.getId().equals(umId))
+          return nodo;
+      }
+
       if (nodo.getId().equals(umId) && (nodo.getClasse() == currClass || currClass == ClasseID.ANY)) {
         return nodo;
       }

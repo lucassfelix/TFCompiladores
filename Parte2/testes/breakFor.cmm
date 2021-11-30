@@ -1,0 +1,16 @@
+int a;
+
+void main() {
+
+   for (a=1; a < 5 ; a++) {
+        
+        if( a == 3)
+        {
+           break;
+        }
+
+      write("a = ", a);
+
+   }
+}
+

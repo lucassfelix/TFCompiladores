@@ -1,0 +1,9 @@
+int i;
+int y;
+string z;
+
+funct void aux(bool i)
+    double y;
+{
+    z = "Amarelo";
+}

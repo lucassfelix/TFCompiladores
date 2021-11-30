@@ -1,0 +1,26 @@
+int i;
+int y;
+string z;
+
+struct PIZZA{
+    string i;
+    bool y;
+};
+
+PIZZA b;
+
+struct COMIDA{
+    int b;
+    PIZZA a;
+};
+
+COMIDA x;
+
+funct void aux(bool i)
+    double y;
+    PIZZA t;
+{
+    z = "Amarelo";
+    x.a.i = "Melão";
+    i = true;
+}

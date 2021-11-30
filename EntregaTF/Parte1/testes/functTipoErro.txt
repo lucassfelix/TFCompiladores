@@ -1,0 +1,18 @@
+int a;
+bool b;
+double d;
+string s;
+
+
+funct string S(int x, bool b, double d){}
+
+funct int A(){}
+
+funct bool B(){}
+
+funct double D(){}
+
+funct void main()
+{
+    s = S(B(),A(),D());
+}

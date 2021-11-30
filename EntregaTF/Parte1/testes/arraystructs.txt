@@ -1,0 +1,13 @@
+struct DATA {
+    int [30] dia;
+};
+
+DATA [10] dias;
+
+funct void main()
+    int i;
+{
+
+    dias[i].dia[i] = i;
+
+}

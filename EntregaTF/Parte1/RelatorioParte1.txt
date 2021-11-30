@@ -1,0 +1,44 @@
+---GRUPO 3---
+Guido Mainardi - 18106136 - guido.mainardi@edu.pucrs.br
+Lucas Félix - 18108826 - lucas.salaverry@edu.pucrs.br
+Pedro Wagner - 18106192 - pedro.wagner00@edu.pucrs.br
+Renata Rittmann = 18110282 - renata.rittmann@edu.pucrs.br
+--
+Plataforma utilizada para desenvolvimento:
+
+Windows 10
+Java 16.0.2
+Jflex 1.8.2
+yacc
+--
+Instruções de compilação e execução:
+
+    1. Gerar o léxico  (gera Yylex.java)
+
+        > jflex parte1.flex  
+        
+        OU
+
+        > java -jar JFlex.jar parte1.flex
+
+    2. Gerar o sintático  (gera Parser.java)
+
+        > yacc -tv -J parte1.y    
+        
+        OU
+
+        > ./yacc.llinux -tv -J parte1.y
+
+    3. compilar código Parser.java
+
+        > javac Parser.java
+
+    4. Testar:
+
+        >  java Parser    
+        
+        OU
+
+        > java Parser testes\<filename>.txt
+--
+Tudo que foi pedido foi implementado :) (Esperamos)

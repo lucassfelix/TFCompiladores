@@ -1,0 +1,16 @@
+int a;
+
+void main() {
+   a=1;
+   while (a<=5) {
+        
+      if (a == 2){
+         break;
+      }
+
+      a = a + 1;
+
+   }
+   write("a = (2) ", a);
+}
+

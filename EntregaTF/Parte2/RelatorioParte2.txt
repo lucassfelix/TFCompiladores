@@ -1,0 +1,51 @@
+---GRUPO 3---
+Guido Mainardi - 18106136 - guido.mainardi@edu.pucrs.br
+Lucas Félix - 18108826 - lucas.salaverry@edu.pucrs.br
+Pedro Wagner - 18106192 - pedro.wagner00@edu.pucrs.br
+Renata Rittmann = 18110282 - renata.rittmann@edu.pucrs.br
+--
+Plataforma utilizada para desenvolvimento:
+
+Windows 10 para programar
+Linux Mint para executar assembly
+Java 16.0.2
+Jflex 1.8.2
+yacc
+--
+Instruções de compilação e execução:
+
+    1. Gerar o léxico  (gera Yylex.java)
+
+        > jflex parte2.flex  
+        
+        OU
+
+        > java -jar JFlex.jar parte2.flex
+
+    2. Gerar o sintático  (gera Parser.java)
+
+        > yacc -tv -J parte2.y    
+        
+        OU
+
+        > ./yacc.llinux -tv -J parte1.y
+
+    3. compilar código Parser.java
+
+        > javac Parser.java
+
+    4. Gerar assembly:
+
+        >  java Parser testes\<filename>.cmm > <filename>.s
+    
+    5. Gerar object (Em máquina linux):
+
+        >  as --32 -o <testes>.o <filename>.s
+        >  ld -m elf_i386 -s -o <filename>  <filename>.o
+
+    6. Executar (Em máquina linux):
+
+        > ./<filename>
+--
+Tudo que foi pedido foi implementado :) (Esperamos)
+Implementamos decremento (--), além do requisitado.

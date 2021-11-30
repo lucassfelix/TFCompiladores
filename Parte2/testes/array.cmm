@@ -1,0 +1,13 @@
+int num;
+int a;
+int [10] nums;
+
+void main() {
+    num=0;
+    for (; num < 10 ; num++) {
+        
+        nums[num] = 10 - num;
+        a = nums[num];
+        write("nums[num] = ", a);
+    }
+}
